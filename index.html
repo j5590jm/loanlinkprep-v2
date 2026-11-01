@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoanLink Prep | Insider Commercial Underwriting & Corporate Treasury Engine</title>
+  <meta name="description" content="LoanLink Prep provides the insider knowledge businesses need to secure capital on their own terms. 100% client-side loan optimization, UCC-1 removal, FASB crypto memos, and DSCR loopholes." />
+  <link rel="canonical" href="https://loanlinkprep.com/" />
+  <style>
+    :root {
+      --bg-base: #07080c;
+      --bg-card: rgba(15, 17, 24, 0.88);
+      --bg-input: #0b0d13;
+      /* Neon Orange dimmed by 20% brightness */
+      --neon-orange: #d9651c;
+      --neon-orange-dim: #cc5500;
+      --neon-orange-glow: rgba(217, 101, 28, 0.24);
+      --neon-orange-border: rgba(217, 101, 28, 0.55);
+      --accent-cyan: #22d3ee;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      line-height: 1.5;
+    }
+
+    body {
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 3D REPEATING LOGO BACKGROUND STAGE */
+    .bg-3d-stage {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      perspective: 950px;
+      background: radial-gradient(circle at 50% 15%, #131724 0%, #07080c 75%);
+    }
+
+    .bg-3d-plane {
+      position: absolute;
+      width: 220vw;
+      height: 220vh;
+      top: -60vh;
+      left: -60vw;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 42px;
+      padding: 40px;
+      transform: rotateX(28deg) rotateZ(-16deg) translateZ(-90px);
+      transform-style: preserve-3d;
+      opacity: 0.22;
+    }
+
+    .bg-3d-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--neon-orange-border);
+      background: linear-gradient(145deg, rgba(217, 101, 28, 0.14), rgba(7, 8, 12, 0.85));
+      color: var(--neon-orange);
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 
+        6px 6px 0px rgba(204, 85, 0, 0.45),
+        12px 12px 24px rgba(0, 0, 0, 0.85),
+        inset 0 0 12px rgba(217, 101, 28, 0.2);
+      transform: translateZ(22px);
+      user-select: none;
+    }
+
+    .bg-3d-tile .t-top {
+      font-size: 1.05rem;
+      line-height: 1.1;
+      color: #ff8533;
+      text-shadow: 2px 2px 0px #592300;
+    }
+
+    .bg-3d-tile .t-bot {
+      font-size: 0.9rem;
+      margin-left: 28px;
+      color: var(--accent-cyan);
+      text-shadow: 1px 1px 0px #083344;
+    }
+
+    .bg-3d-tile img {
+      max-width: 120px;
+      max-height: 60px;
+      object-fit: contain;
+      filter: drop-shadow(4px 4px 0px rgba(217, 101, 28, 0.6));
+    }
+
+    /* MAIN CONTENT WRAPPER */
+    .app-shell {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    /* TOP TRUST & LOGO CUSTOMIZER BAR */
+    .trust-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: rgba(11, 13, 19, 0.92);
+      border-bottom: 1px solid rgba(217, 101, 28, 0.3);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .trust-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--success);
+    }
+
+    .logo-upload-label {
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--neon-orange-border);
+      color: var(--neon-orange);
+      font-weight: 600;
+      transition: all 0.2s ease;
+      background: rgba(217, 101, 28, 0.08);
+    }
+
+    .logo-upload-label:hover {
+      background: var(--neon-orange);
+      color: #07080c;
+    }
+
+    /* HEADER & STACKED TEXT LOGO */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 26px 0 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      gap: 20px;
+    }
+
+    .brand-stacked {
+      text-decoration: none;
+      display: inline-block;
+      font-family: "Inter", system-ui, sans-serif;
+      font-weight: 900;
+      line-height: 1.02;
+      padding: 8px 14px;
+      border-left: 4px solid var(--neon-orange);
+      background: rgba(217, 101, 28, 0.06);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .brand-stacked .line-1 {
+      display: block;
+      font-size: 1.85rem;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+    }
+
+    .brand-stacked .line-2 {
+      display: block;
+      font-size: 1.45rem;
+      color: var(--neon-orange);
+      padding-left: 42px;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--neon-orange);
+      background: rgba(217, 101, 28, 0.1);
+    }
+
+    .nav-links .nav-cta {
+      border: 1px solid var(--neon-orange);
+      color: var(--neon-orange);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 44px 0 34px;
+      max-width: 940px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--neon-orange);
+      background: rgba(217, 101, 28, 0.12);
+      border: 1px solid var(--neon-orange-border);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4.2vw, 3.1rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      color: var(--neon-orange);
+    }
+
+    .hero-pitch {
+      font-size: 1.12rem;
+      color: #cbd5e1;
+      background: rgba(15, 17, 24, 0.85);
+      border-left: 4px solid var(--neon-orange);
+      padding: 18px 22px;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      margin-bottom: 24px;
+    }
+
+    /* FILTER TABS */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .filter-btn {
+      background: var(--bg-card);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      border-color: var(--neon-orange);
+      color: var(--text-main);
+      background: rgba(217, 101, 28, 0.18);
+      box-shadow: 0 0 14px var(--neon-orange-glow);
+    }
+
+    /* 8 LOOPHOLE CARDS GRID */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 22px;
+      margin-bottom: 56px;
+    }
+
+    .app-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--neon-orange-border);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.65), 0 0 18px var(--neon-orange-glow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--neon-orange);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 24px rgba(217, 101, 28, 0.36);
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--neon-orange);
+      background: rgba(217, 101, 28, 0.12);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .app-card h3 {
+      font-size: 1.18rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .card-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 11px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin-bottom: 4px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 9px 11px;
+      background: var(--bg-input);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 7px;
+      color: var(--text-main);
+      font-size: 0.88rem;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--neon-orange);
+    }
+
+    .btn-run {
+      width: 100%;
+      padding: 11px 14px;
+      margin-top: 6px;
+      background: linear-gradient(135deg, var(--neon-orange), var(--neon-orange-dim));
+      color: #07080c;
+      font-weight: 800;
+      font-size: 0.88rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: filter 0.15s;
+    }
+
+    .btn-run:hover {
+      filter: brightness(1.12);
+    }
+
+    .card-output {
+      margin-top: 14px;
+      padding: 13px;
+      border-radius: 8px;
+      background: rgba(7, 8, 12, 0.92);
+      border: 1px dashed var(--neon-orange-border);
+      font-size: 0.82rem;
+      color: #e2e8f0;
+    }
+
+    .card-output pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      color: #f8fafc;
+      margin-top: 8px;
+      padding: 10px;
+      background: #050609;
+      border-radius: 6px;
+      border-left: 3px solid var(--neon-orange);
+    }
+
+    .aff-bar {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .aff-link {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 7px 10px;
+      border-radius: 6px;
+      background: rgba(34, 211, 238, 0.1);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(34, 211, 238, 0.35);
+      transition: all 0.2s;
+    }
+
+    .aff-link:hover {
+      background: var(--accent-cyan);
+      color: #07080c;
+    }
+
+    .unlock-link {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 7px 10px;
+      border-radius: 6px;
+      background: rgba(217, 101, 28, 0.14);
+      color: var(--neon-orange);
+      border: 1px solid var(--neon-orange-border);
+      cursor: pointer;
+    }
+
+    /* LOAN & DSCR CALCULATOR */
+    .calc-panel {
+      background: var(--bg-card);
+      border: 2px solid var(--neon-orange-border);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 56px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75), 0 0 22px var(--neon-orange-glow);
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 18px;
+    }
+
+    .calc-results {
+      background: #050609;
+      border: 1px solid var(--neon-orange-border);
+      border-radius: 12px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .metric-val {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--neon-orange);
+    }
+
+    /* PRICING SECTION */
+    .pricing-section {
+      padding: 24px 0 44px;
+    }
+
+    .unlock-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(217, 101, 28, 0.1);
+      border: 1px solid var(--neon-orange-border);
+      padding: 14px 20px;
+      border-radius: 10px;
+      margin-bottom: 26px;
+    }
+
+    .unlock-bar input {
+      padding: 9px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--neon-orange-border);
+      background: #050609;
+      color: var(--text-main);
+      min-width: 240px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .price-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--neon-orange-border);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 16px var(--neon-orange-glow);
+      position: relative;
+    }
+
+    .price-card.featured {
+      border-width: 2.5px;
+      border-color: var(--neon-orange);
+      transform: scale(1.02);
+    }
+
+    .price-badge {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--neon-orange);
+      color: #07080c;
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 4px 12px;
+      border-radius: 99px;
+      text-transform: uppercase;
+    }
+
+    .price-amount {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--neon-orange);
+      margin: 12px 0;
+    }
+
+    .price-amount span {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .price-list {
+      list-style: none;
+      margin: 16px 0 24px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .price-list li {
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .price-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--neon-orange);
+      font-weight: 900;
+    }
+
+    /* FOOTER & AADS */
+    footer {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .aads-container {
+      margin: 0 auto 24px;
+      max-width: 728px;
+      padding: 12px;
+      background: rgba(11, 13, 19, 0.85);
+      border: 1px solid rgba(217, 101, 28, 0.25);
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .price-card.featured {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 3D REPEATING LOGO BACKGROUND -->
+  <div class="bg-3d-stage" aria-hidden="true">
+    <div class="bg-3d-plane" id="bg3dPlane"></div>
+  </div>
+
+  <!-- TOP PRIVACY & 3D LOGO CUSTOMIZER BAR -->
+  <div class="trust-bar">
+    <div class="trust-pill">
+      <span class="trust-dot"></span>
+      100% Local Browser Compute (localStorage) — Zero IRS Docs, Zero Server Storage, Zero Broker Spam
+    </div>
+    <div>
+      <label class="logo-upload-label" for="logoUploadInput">
+        + Upload Custom 3D Background Logo
+      </label>
+      <input type="file" id="logoUploadInput" accept="image/*" style="display:none" />
+      <button id="resetLogoBtn" class="logo-upload-label" style="display:none; background:transparent;">Reset 3D Logo</button>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <!-- HEADER WITH STACKED LOAN LINK / PREP LOGO -->
+    <header>
+      <a href="/" class="brand-stacked" aria-label="Loan Link Prep Home">
+        <span class="line-1">Loan Link</span>
+        <span class="line-2">Prep</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#loophole-grid">8 Loophole Engines</a>
+        <a href="#loan-calculator">Loan &amp; DSCR Calculator</a>
+        <a href="/guides/index.html">Underwriting Guides (56)</a>
+        <a href="#pricing-plan" class="nav-cta">Pricing &amp; Vault Key</a>
+      </nav>
+    </header>
+
+    <!-- HERO SECTION WITH PITCH -->
+    <section class="hero">
+      <span class="hero-badge">Third-Party Financial Engineering &amp; Treasury Hub</span>
+      <h1>Beat Automated Bank Underwriting. <span>Keep Your Private Data Off-Server.</span></h1>
+      <p class="hero-pitch">
+        <strong>LoanLink Prep</strong> provides the insider knowledge businesses need to secure capital on their own terms. As a secure preparation engine, we ingest basic company data to reveal high-leverage—yet strictly legal—approval loopholes and strategies. You get the blueprint to beat the underwriting process, while your most sensitive tax and financial records stay completely off our servers.
+      </p>
+      <div class="filter-bar" role="tablist">
+        <button class="filter-btn active" onclick="filterCards('all', this)">All 8 Engines</button>
+        <button class="filter-btn" onclick="filterCards('legal', this)">UCC-1 &amp; Legal Shields</button>
+        <button class="filter-btn" onclick="filterCards('math', this)">DSCR &amp; SBA Math</button>
+        <button class="filter-btn" onclick="filterCards('crypto', this)">Crypto &amp; Web3 Treasury</button>
+        <button class="filter-btn" onclick="filterCards('credit', this)">Credit Bureau Routing</button>
+      </div>
+    </section>
+
+    <!-- 8 FINANCIAL ENGINEERING & LOOPHOLE CARDS -->
+    <section id="loophole-grid">
+      <div class="section-title">Insider Underwriting &amp; Treasury Loophole Engines</div>
+      <p class="section-sub">Plug in non-sensitive operational figures below. All calculations and legal memo drafts execute locally in your browser.</p>
+
+      <div class="cards-grid">
+
+        <!-- CARD 1: DEAD UCC-1 LIEN FORCE-REMOVAL -->
+        <article class="app-card" data-cat="legal">
+          <div>
+            <span class="card-tag">1. Legal &amp; Credit Shield</span>
+            <h3>Dead UCC-1 Lien Force-Removal</h3>
+            <p class="card-desc">Paid off a loan or MCA years ago, but a "blanket UCC-1 lien" is still triggering automated bank rejections? Generate a statutory 20-day demand under UCC § 9-513.</p>
+            <div class="form-group">
+              <label>State of Incorporation</label>
+              <input type="text" id="c1_state" value="Indiana" />
+            </div>
+            <div class="form-group">
+              <label>Secured Party / Former Lender Name</label>
+              <input type="text" id="c1_lender" value="Legacy Commercial Funding LLC" />
+            </div>
+            <div class="form-group">
+              <label>Approximate Date Debt Was Paid in Full</label>
+              <input type="text" id="c1_date" value="March 15, 2025" />
+            </div>
+            <button class="btn-run" onclick="runCard1()">Generate UCC § 9-513 Demand</button>
+          </div>
+          <div class="card-output" id="out_c1">
+            Click generate to build your statutory 20-day UCC-3 termination demand notice.
+          </div>
+        </article>
+
+        <!-- CARD 2: EBITDA & OWNER-DRAW ADD-BACK RECLASSIFIER -->
+        <article class="app-card" data-cat="math">
+          <div>
+            <span class="card-tag">2. Underwriting Math Fix</span>
+            <h3>EBITDA &amp; Owner-Draw Add-Back Engine</h3>
+            <p class="card-desc">Aggressive tax write-offs tank your net income and fail the bank's 1.25x DSCR rule. Reclassify owner draws, depreciation, and one-time expenses without amending taxes.</p>
+            <div class="form-group">
+              <label>Reported Annual Net Profit ($)</label>
+              <input type="number" id="c2_net" value="42000" />
+            </div>
+            <div class="form-group">
+              <label>Annual Owner Draws, Perks &amp; One-Time CapEx ($)</label>
+              <input type="number" id="c2_draws" value="58000" />
+            </div>
+            <div class="form-group">
+              <label>Proposed Annual Loan Debt Service ($)</label>
+              <input type="number" id="c2_debt" value="68000" />
+            </div>
+            <button class="btn-run" onclick="runCard2()">Calculate Add-Back DSCR Lift</button>
+          </div>
+          <div class="card-output" id="out_c2">
+            See how underwriting add-backs flip an automated rejection into a pass.
+          </div>
+        </article>
+
+        <!-- CARD 3: CRYPTO TREASURY & FASB FAIR-VALUE MEMO -->
+        <article class="app-card" data-cat="crypto">
+          <div>
+            <span class="card-tag">3. Web3 &amp; Digital Assets</span>
+            <h3>FASB ASU 2023-08 Crypto Balance Sheet Memo</h3>
+            <p class="card-desc">Stop banks from discounting your Bitcoin or Ethereum to zero. Cite ASC 350-60 (FASB Fair-Value Accounting) to count self-custodied digital assets toward liquidity reserves.</p>
+            <div class="form-group">
+              <label>Corporate Digital Asset Held</label>
+              <select id="c3_asset">
+                <option value="Bitcoin (BTC)">Bitcoin (BTC)</option>
+                <option value="Ethereum (ETH)">Ethereum (ETH)</option>
+                <option value="USDC / USDT Treasury">USDC / USDT Treasury</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Current Fair Market Value ($)</label>
+              <input type="number" id="c3_val" value="85000" />
+            </div>
+            <div class="form-group">
+              <label>Cost Basis on Books ($)</label>
+              <input type="number" id="c3_cost" value="48000" />
+            </div>
+            <button class="btn-run" onclick="runCard3()">Build ASC 350-60 Treasury Memo</button>
+          </div>
+          <div class="card-output" id="out_c3">
+            Generate your corporate fair-value accounting memo for loan underwriters.
+          </div>
+        </article>
+
+        <!-- CARD 4: NON-CUSTODIAL TREASURY LIQUIDITY SWAP -->
+        <article class="app-card" data-cat="crypto">
+          <div>
+            <span class="card-tag">4. Zero-KYC / Web3 Capital</span>
+            <h3>Non-Custodial Treasury Liquidity Router</h3>
+            <p class="card-desc">Convert stagnant digital assets into working stablecoin liquidity or collateral reserves in 5 minutes—bypassing bank underwriters, credit pulls, and predatory brokers.</p>
+            <div class="form-group">
+              <label>Source Corporate Asset</label>
+              <select id="c4_from">
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="SOL">SOL (Solana)</option>
+                <option value="USDC">USDC (Stablecoin)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Target Working Treasury Asset</label>
+              <select id="c4_to">
+                <option value="USDC">USDC (Working Capital)</option>
+                <option value="USDT">USDT (Treasury Reserve)</option>
+                <option value="BTC">BTC (Long-Term Collateral)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Treasury Swap Amount ($ USD Equivalent)</label>
+              <input type="number" id="c4_amt" value="25000" />
+            </div>
+            <button class="btn-run" onclick="runCard4()">Calculate Non-Custodial Route</button>
+          </div>
+          <div class="card-output" id="out_c4">
+            Compare instant non-custodial treasury routing vs. traditional bank origination fees.
+          </div>
+        </article>
+
+        <!-- CARD 5: BANK CREDIT BUREAU FREEZE & ROUTE MATRIX -->
+        <article class="app-card" data-cat="credit">
+          <div>
+            <span class="card-tag">5. Credit Engineering</span>
+            <h3>Bank Credit Bureau "Freeze &amp; Route" Matrix</h3>
+            <p class="card-desc">Major banks pull specific bureaus (Experian Biz, D&amp;B, Equifax, or FICO SBSS). Freeze your weakest bureau and route applications strictly to lenders pulling your highest score.</p>
+            <div class="form-group">
+              <label>Your Strongest Credit Bureau</label>
+              <select id="c5_strong">
+                <option value="Experian">Experian Business / Personal</option>
+                <option value="Equifax">Equifax Commercial</option>
+                <option value="TransUnion">TransUnion / D&amp;B Paydex</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Your Weakest Credit Bureau (To Freeze)</label>
+              <select id="c5_weak">
+                <option value="TransUnion">TransUnion</option>
+                <option value="Equifax">Equifax</option>
+                <option value="Experian">Experian</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Target Revolving Credit Line ($)</label>
+              <input type="number" id="c5_limit" value="50000" />
+            </div>
+            <button class="btn-run" onclick="runCard5()">Reveal Freeze &amp; Routing Strategy</button>
+          </div>
+          <div class="card-output" id="out_c5">
+            Identify which bureau to place on security freeze before submitting your application.
+          </div>
+        </article>
+
+        <!-- CARD 6: D&B PAYDEX 80+ FAST-TRACK & DISPUTE ENGINE -->
+        <article class="app-card" data-cat="credit">
+          <div>
+            <span class="card-tag">6. Vendor Credit Loophole</span>
+            <h3>D&amp;B Paydex 80+ Fast-Track &amp; Dispute Engine</h3>
+            <p class="card-desc">Never pay Dun &amp; Bradstreet $1,500+ to build credit. Use low-cost Net-30 vendor reporting math to force an 80+ early-payment Paydex score and dispute stale trade lines.</p>
+            <div class="form-group">
+              <label>Current D&amp;B Paydex Score (0 if none)</label>
+              <input type="number" id="c6_score" value="62" />
+            </div>
+            <div class="form-group">
+              <label>Current Reporting Vendor Trade Lines</label>
+              <input type="number" id="c6_lines" value="1" />
+            </div>
+            <div class="form-group">
+              <label>Days Paid Ahead of Net-30 Due Date</label>
+              <input type="number" id="c6_days" value="15" />
+            </div>
+            <button class="btn-run" onclick="runCard6()">Generate Paydex 80+ Blueprint</button>
+          </div>
+          <div class="card-output" id="out_c6">
+            Calculate exact Net-30 trade lines needed to trigger a Paydex 85+ score.
+          </div>
+        </article>
+
+        <!-- CARD 7: SBA CREDIT ELSEWHERE & LIQUIDITY CAP OVERRIDE -->
+        <article class="app-card" data-cat="math">
+          <div>
+            <span class="card-tag">7. SBA 7(a) Loophole</span>
+            <h3>SBA "Credit Elsewhere" Liquidity Shield</h3>
+            <p class="card-desc">Holding too much liquid cash or crypto triggers an SBA rejection under the "Credit Elsewhere" test. Earmark excess reserves into a formal CapEx Working Capital Schedule.</p>
+            <div class="form-group">
+              <label>Total Liquid Cash &amp; Treasury Reserves ($)</label>
+              <input type="number" id="c7_cash" value="140000" />
+            </div>
+            <div class="form-group">
+              <label>Target SBA Loan Amount ($)</label>
+              <input type="number" id="c7_loan" value="250000" />
+            </div>
+            <div class="form-group">
+              <label>12-Month Planned Equipment / Hiring / Expansion ($)</label>
+              <input type="number" id="c7_capex" value="115000" />
+            </div>
+            <button class="btn-run" onclick="runCard7()">Build CapEx Encumbrance Schedule</button>
+          </div>
+          <div class="card-output" id="out_c7">
+            Shield liquid reserves from triggering an SBA Credit Elsewhere denial.
+          </div>
+        </article>
+
+        <!-- CARD 8: NAICS CODE HIGH-RISK DE-CLASSIFICATION -->
+        <article class="app-card" data-cat="legal">
+          <div>
+            <span class="card-tag">8. Algorithmic Bypass</span>
+            <h3>NAICS Code "High-Risk" De-Classification</h3>
+            <p class="card-desc">Banks auto-reject "Restricted NAICS" industries (Crypto, Trucking, Real Estate, Ag, Consulting). Reclassify under an adjacent, bank-approved B2B Operations NAICS code.</p>
+            <div class="form-group">
+              <label>Current Flagged Industry Category</label>
+              <select id="c8_ind">
+                <option value="Crypto / Web3 / Digital Assets">Crypto / Web3 / Digital Assets</option>
+                <option value="Trucking / Freight / Logistics">Trucking / Freight / Logistics</option>
+                <option value="Real Estate / Land Holding">Real Estate / Land Holding</option>
+                <option value="Agriculture / Livestock / Farm">Agriculture / Livestock / Farm</option>
+                <option value="Independent Consulting / Agency">Independent Consulting / Agency</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Annual Gross Revenue ($)</label>
+              <input type="number" id="c8_rev" value="320000" />
+            </div>
+            <button class="btn-run" onclick="runCard8()">Generate Safe NAICS Reclassification</button>
+          </div>
+          <div class="card-output" id="out_c8">
+            Find the adjacent low-risk 6-digit NAICS code and Secretary of State filing language.
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- INTERACTIVE LOAN & DSCR CALCULATOR -->
+    <section id="loan-calculator" class="calc-panel">
+      <div class="section-title">Interactive Commercial Loan &amp; Credit-Tier Savings Calculator</div>
+      <p class="section-sub">See how much a top-tier business credit profile and clean DSCR save you in total interest over the life of a commercial expansion loan.</p>
+
+      <div class="calc-grid">
+        <div>
+          <div class="form-group">
+            <label>Loan Principal Amount ($)</label>
+            <input type="number" id="calc_principal" value="150000" oninput="runMainCalculator()" />
+          </div>
+          <div class="form-group">
+            <label>Loan Term (Years)</label>
+            <input type="number" id="calc_years" value="5" min="1" max="25" oninput="runMainCalculator()" />
+          </div>
+          <div class="form-group">
+            <label>Unoptimized Tier Interest Rate (% APR)</label>
+            <input type="number" id="calc_bad_rate" value="14.5" step="0.1" oninput="runMainCalculator()" />
+          </div>
+          <div class="form-group">
+            <label>LoanLink Prep Optimized Rate (% APR)</label>
+            <input type="number" id="calc_good_rate" value="7.8" step="0.1" oninput="runMainCalculator()" />
+          </div>
+          <div class="form-group">
+            <label>Monthly Net Operating Income ($ for DSCR)</label>
+            <input type="number" id="calc_noi" value="4200" oninput="runMainCalculator()" />
+          </div>
+        </div>
+
+        <div class="calc-results">
+          <div>
+            <div class="metric-row">
+              <span>Unoptimized Monthly Payment:</span>
+              <strong id="res_bad_pmt">$3,529.24</strong>
+            </div>
+            <div class="metric-row">
+              <span>Optimized Monthly Payment:</span>
+              <strong id="res_good_pmt" style="color:var(--success)">$3,027.14</strong>
+            </div>
+            <div class="metric-row">
+              <span>Your New DSCR Ratio (Target 1.25x+):</span>
+              <strong id="res_dscr" style="color:var(--accent-cyan)">1.39x (PASS)</strong>
+            </div>
+            <div class="metric-row" style="border-bottom:none; padding-top:16px;">
+              <span>Total Capital Saved via Credit Prep:</span>
+              <span class="metric-val" id="res_savings">$30,126.00</span>
+            </div>
+          </div>
+          <div class="aff-bar">
+            <a href="#pricing-plan" class="aff-link">Unlock Full Underwriting Blueprint ($19)</a>
+            <a id="calc_crypto_cta" href="https://changenow.app.link/referral?link_id=1d9d2f522090a1" target="_blank" rel="noopener" class="aff-link">Swap Treasury Liquidity</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM PRICING PLAN -->
+    <section id="pricing-plan" class="pricing-section">
+      <div class="section-title">Transparent Self-Service Pricing Plan</div>
+      <p class="section-sub">Zero retainers. Zero percentage-of-loan broker fees. Instant browser unlock.</p>
+
+      <!-- LOCAL VAULT KEY UNLOCK BAR -->
+      <div class="unlock-bar">
+        <div>
+          <strong style="color:var(--neon-orange)">Already Purchased a Vault Key?</strong>
+          <span style="font-size:0.85rem; color:var(--text-muted); margin-left:8px;">Enter your unlock code below to remove all document redactions in this browser:</span>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <input type="text" id="vaultKeyInput" placeholder="Enter Vault Key (e.g. LLP-PRO-2026)" />
+          <button class="btn-run" style="width:auto; margin:0; padding:9px 18px;" onclick="activateVaultKey()">Unlock Vault</button>
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- TIER 1: FREE -->
+        <div class="price-card">
+          <div>
+            <span class="card-tag">Tier 1 • Sandbox</span>
+            <h3>Self-Prep Diagnostic</h3>
+            <div class="price-amount">$0 <span>/ forever</span></div>
+            <ul class="price-list">
+              <li>Unlimited use of Loan &amp; DSCR Stress-Tester</li>
+              <li>Preview math on all 8 Loophole Engines</li>
+              <li>Access to 56 Public Underwriting Guides</li>
+              <li>100% Local Browser Storage (Zero Tracking)</li>
+            </ul>
+          </div>
+          <a href="#loophole-grid" class="btn-run" style="text-align:center; text-decoration:none; display:block;">Use Free Calculators Above</a>
+        </div>
+
+        <!-- TIER 2: $19 VAULT UNLOCK -->
+        <div class="price-card featured">
+          <span class="price-badge">Most Popular • Instant Delivery</span>
+          <div>
+            <span class="card-tag">Tier 2 • Full Legal &amp; Math Vault</span>
+            <h3>"Beat the Underwriter" Pass</h3>
+            <div class="price-amount">$19 <span>/ one-time</span></div>
+            <ul class="price-list">
+              <li>Unlocks all 8 Unredacted Copy-Paste Legal Memos</li>
+              <li>Full UCC § 9-513 20-Day Statutory Termination Packet</li>
+              <li>FASB ASU 2023-08 Corporate Crypto Resolution Template</li>
+              <li>100+ Bank Credit Bureau Pull &amp; Freeze Cheat Sheet</li>
+              <li>Instant Lifetime Browser Unlock Key</li>
+            </ul>
+          </div>
+          <a id="tier2_checkout" href="https://loanlinkprep.com/#pricing-plan" target="_blank" rel="noopener" class="btn-run" style="text-align:center; text-decoration:none; display:block;">Get Instant $19 Vault Key</a>
+        </div>
+
+        <!-- TIER 3: CORPORATE TREASURY & HARDWARE STACK -->
+        <div class="price-card">
+          <div>
+            <span class="card-tag">Tier 3 • Sovereign Treasury</span>
+            <h3>Corporate Asset &amp; Book Stack</h3>
+            <div class="price-amount">Direct <span>/ Vetted Tools</span></div>
+            <ul class="price-list">
+              <li>Audit-Ready Corporate Crypto Tax Reporting (Koinly)</li>
+              <li>Multi-Sig Cold Storage for Business Reserves (Ledger / Trezor)</li>
+              <li>Non-Custodial Treasury Liquidity Routing (ChangeNOW)</li>
+              <li>Curated Commercial Credit &amp; SBA Reference Books</li>
+            </ul>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <a id="tier3_koinly" href="https://koinly.io/" target="_blank" rel="noopener" class="aff-link">1. Corporate Crypto Tax &amp; Audit Tool (Koinly)</a>
+            <a id="tier3_ledger" href="https://shop.ledger.com/" target="_blank" rel="noopener" class="aff-link">2. Corporate Treasury Hardware Vault (Ledger)</a>
+            <a id="tier3_books" href="https://www.amazon.com/s?k=business+credit+and+commercial+loans+book" target="_blank" rel="noopener" class="aff-link">3. Commercial Underwriting Bookstore (Amazon)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER WITH AADS -->
+    <footer>
+      <div class="aads-container">
+        <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; color:var(--text-muted);">Sponsored Fintech Partner (Zero-Tracking Ad Unit)</div>
+        <iframe data-aa="2459805" src="//acceptable.a-ads.com/2459805" style="border:0px; padding:0; width:100%; height:90px; overflow:hidden; background-color: transparent;"></iframe>
+      </div>
+
+      <p style="margin-bottom:10px;">
+        <strong>LoanLink Prep</strong> is an educational software, publishing, and financial calculation platform. We are not a lender, broker, law firm, or CPA firm, and we never submit loan applications or collect sensitive tax records.
+      </p>
+      <p>
+        <a href="/guides/index.html" style="color:var(--neon-orange); text-decoration:none; font-weight:700;">Browse All 56 Commercial Loan Loophole Guides</a> •
+        <a href="/llms.txt" style="color:var(--text-muted); text-decoration:none;">llms.txt</a> •
+        <a href="/sitemap.xml" style="color:var(--text-muted); text-decoration:none;">Sitemap</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // CONFIG OBJECT (Updated automatically by build_pseo.py)
+    const LLP_CONFIG = {
+      changenowUrl: "https://changenow.app.link/referral?link_id=1d9d2f522090a1",
+      koinlyUrl: "https://koinly.io/",
+      ledgerUrl: "https://shop.ledger.com/",
+      trezorUrl: "https://affil.trezor.io/",
+      amazonBooksUrl: "https://www.amazon.com/s?k=business+credit+commercial+lending+sba+book",
+      accountingUrl: "https://www.xero.com/",
+      vaultCheckoutUrl: "#pricing-plan",
+      masterVaultKey: "LLP-PRO-2026"
+    };
+
+    // 1. RENDER 3D REPEATING LOGO BACKGROUND
+    function render3DBackground() {
+      const plane = document.getElementById("bg3dPlane");
+      const savedLogo = localStorage.getItem("llp_custom_3d_logo");
+      const resetBtn = document.getElementById("resetLogoBtn");
+      plane.innerHTML = "";
+
+      if (savedLogo) {
+        resetBtn.style.display = "inline-block";
+      } else {
+        resetBtn.style.display = "none";
+      }
+
+      const tileCount = 48;
+      for (let i = 0; i < tileCount; i++) {
+        const div = document.createElement("div");
+        div.className = "bg-3d-tile";
+        if (savedLogo) {
+          const img = document.createElement("img");
+          img.src = savedLogo;
+          img.alt = "Loan Link Prep 3D Logo";
+          div.appendChild(img);
+        } else {
+          div.innerHTML = `<span class="t-top">Loan Link</span><span class="t-bot">Prep</span>`;
+        }
+        plane.appendChild(div);
+      }
+    }
+
+    document.getElementById("logoUploadInput").addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          localStorage.setItem("llp_custom_3d_logo", evt.target.result);
+          render3DBackground();
+        } catch (err) {
+          alert("Image file is too large for browser localStorage. Use a smaller PNG/SVG under 1MB.");
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById("resetLogoBtn").addEventListener("click", function() {
+      localStorage.removeItem("llp_custom_3d_logo");
+      render3DBackground();
+    });
+
+    // 2. VAULT UNLOCK STATE CHECK
+    function isVaultUnlocked() {
+      return localStorage.getItem("llp_vault_unlocked") === "true";
+    }
+
+    function activateVaultKey() {
+      const val = document.getElementById("vaultKeyInput").value.trim().toUpperCase();
+      if (val === LLP_CONFIG.masterVaultKey || val.startsWith("LLP-")) {
+        localStorage.setItem("llp_vault_unlocked", "true");
+        alert("Vault Unlocked! All 8 legal memos and underwriting templates are now unredacted.");
+        runAllCards();
+      } else {
+        alert("Invalid Vault Key. Purchase the $19 Pass below or enter a valid LLP key.");
+      }
+    }
+
+    // 3. FILTER CARDS BY CATEGORY
+    function filterCards(cat, btn) {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      document.querySelectorAll(".app-card").forEach(card => {
+        if (cat === "all" || card.getAttribute("data-cat") === cat) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    // 4. THE 8 LOOPHOLE GENERATORS
+    function runCard1() {
+      const st = document.getElementById("c1_state").value;
+      const lender = document.getElementById("c1_lender").value;
+      const dt = document.getElementById("c1_date").value;
+      const unlocked = isVaultUnlocked();
+
+      const memoText = unlocked
+        ? `AUTHENTICATED DEMAND FOR TERMINATION STATEMENT PURSUANT TO ${st.toUpperCase()} UCC § 9-513(c)\nTo: ${lender}\nNotice Date: ${new Date().toISOString().split('T')[0]}\n\nAll obligations secured by your financing statement were satisfied in full on ${dt}. Pursuant to Uniform Commercial Code § 9-513(c), you have exactly twenty (20) days from receipt of this authenticated demand to file a UCC-3 Termination Statement with the ${st} Secretary of State or provide an authenticated termination statement to Debtor. Failure to comply within 20 days triggers statutory damages of $500 plus actual financial losses from denied commercial credit under UCC § 9-625(e)(4).`
+        : `[STATUTORY CITATION PREVIEW: ${st.toUpperCase()} UCC § 9-513(c)]\nSecured Party (${lender}) has a mandatory 20-day window to terminate the blanket lien paid on ${dt}. Failure triggers $500 statutory penalty + actual loan rejection damages under UCC § 9-625(e)(4).\n[Unlock $19 Vault below for full copy-paste legal demand notice & self-filing UCC-3 instructions]`;
+
+      document.getElementById("out_c1").innerHTML = `
+        <strong style="color:var(--neon-orange)">20-Day Statutory Force-Termination Ready:</strong>
+        <pre>${memoText}</pre>
+        <div class="aff-bar">
+          <a href="${LLP_CONFIG.amazonBooksUrl}" target="_blank" rel="noopener" class="aff-link">Commercial Credit Law Guide</a>
+          <a href="#pricing-plan" class="unlock-link">${unlocked ? "✓ Vault Unlocked" : "Unlock Full UCC-3 Packet ($19)"}</a>
+        </div>`;
+    }
+
+    function runCard2() {
+      const net = parseFloat(document.getElementById("c2_net").value) || 0;
+      const draws = parseFloat(document.getElementById("c2_draws").value) || 0;
+      const debt = parseFloat(document.getElementById("c2_debt").value) || 1;
+      const rawDscr = (net / debt).toFixed(2);
+      const adjDscr = ((net + draws) / debt).toFixed(2);
+      const unlocked = isVaultUnlocked();
+
+      const status = adjDscr >= 1.25 ? "PASSES 1.25x BANK THRESHOLD" : "NEEDS ADDITIONAL ADD-BACKS";
+      const memo = unlocked
+        ? `UNDERWRITING EBITDA ADD-BACK SCHEDULE:\n• Baseline Net Income: $${net.toLocaleString()}\n• Non-Recurring CapEx & Discretionary Owner Draw Add-Backs: +$${draws.toLocaleString()}\n• Adjusted Cash Flow Available for Debt Service: $${(net + draws).toLocaleString()}\n• Adjusted DSCR: ${adjDscr}x (Exceeds 1.25x institutional covenant)`
+        : `Raw DSCR: ${rawDscr}x (Auto-Reject) → Adjusted DSCR: ${adjDscr}x (${status}).\n[Unlock $19 Vault to copy the CPA-formatted Underwriter Add-Back Schedule]`;
+
+      document.getElementById("out_c2").innerHTML = `
+        <strong style="color:var(--success)">DSCR Boosted from ${rawDscr}x to ${adjDscr}x</strong>
+        <pre>${memo}</pre>
+        <div class="aff-bar">
+          <a href="${LLP_CONFIG.accountingUrl}" target="_blank" rel="noopener" class="aff-link">Tag Add-Backs in Xero/QuickBooks</a>
+          <a href="#pricing-plan" class="unlock-link">${unlocked ? "✓ Vault Unlocked" : "Unlock CPA Memo ($19)"}</a>
+        </div>`;
+    }
+
+    function runCard3() {
+      const asset = document.getElementById("c3_asset").value;
+      const val = parseFloat(document.getElementById("c3_val").value) || 0;
+      const cost = parseFloat(document.getElementById("c3_cost").value) || 0;
+      const gain = val - cost;
+      const unlocked = isVaultUnlocked();
+
+      const memo = unlocked
+        ? `BOARD TREASURY RESOLUTION — ASC 350-60 (FASB ASU 2023-08)\nPursuant to Financial Accounting Standards Board ASU 2023-08 (Subtopic 350-60), the Company measures its fungible digital asset reserves (${asset}) at fair market value of $${val.toLocaleString()} rather than historical impaired cost ($${cost.toLocaleString()}), recognizing +$${gain.toLocaleString()} in net balance sheet liquidity for working capital covenant compliance.`
+        : `FASB ASU 2023-08 Fair-Value Uplift: +$${gain.toLocaleString()} added to balance sheet equity for ${asset}.\n[Unlock $19 Vault for full ASC 350-60 Underwriter Disclosure Memo]`;
+
+      document.getElementById("out_c3").innerHTML = `
+        <strong style="color:var(--accent-cyan)">Recognized Liquidity: $${val.toLocaleString()} (+$${gain.toLocaleString()} Uplift)</strong>
+        <pre>${memo}</pre>
+        <div class="aff-bar">
+          <a href="${LLP_CONFIG.ledgerUrl}" target="_blank" rel="noopener" class="aff-link">Ledger Corporate Vault</a>
+          <a href="${LLP_CONFIG.koinlyUrl}" target="_blank" rel="noopener" class="aff-link">Koinly FASB Tax Audit</a>
+        </div>`;
+    }
+
+    function runCard4() {
+      const from = document.getElementById("c4_from").value;
+      const to = document.getElementById("c4_to").value;
+      const amt = parseFloat(document.getElementById("c4_amt").value) || 0;
+      const bankFeeSaved = (amt * 0.035).toFixed(0);
+
+      document.getElementById("out_c4").innerHTML = `
+        <strong style="color:var(--neon-orange)">Route: ${from} → ${to} ($${amt.toLocaleString()})</strong>
+        <pre>Traditional Bank Origination Fee (3.5%): $${Number(bankFeeSaved).toLocaleString()} + 45-Day Underwriting Wait.\nNon-Custodial Treasury Swap: ~5 Minutes, Zero Credit Pull, Zero UCC-1 Blanket Lien.</pre>
+        <div class="aff-bar">
+          <a href="${LLP_CONFIG.changenowUrl}" target="_blank" rel="noopener" class="aff-link">Execute Instant Treasury Swap (ChangeNOW)</a>
+          <a href="${LLP_CONFIG.trezorUrl}" target="_blank" rel="noopener" class="aff-link">Trezor Cold Storage</a>
+        </div>`;
+    }
+
+    function runCard5() {
+      const strong = document.getElementById("c5_strong").value;
+      const weak = document.getElementById("c5_weak").value;
+      const limit = parseFloat(document.getElementById("c5_limit").value) || 50000;
+      const unlocked = isVaultUnlocked();
+
+      const map = {
+        Experian: "American Express Business, Chase Ink (select regions), Bank of America Commercial",
+        Equifax: "Truist Commercial, Citizens Bank, Regional Credit Unions, Fifth Third",
+        TransUnion: "US Bank Business Triple Cash, Barclays Business, PNC Stated-Income Lines"
+      };
+
+      const text = unlocked
+        ? `STEP 1: Place a temporary PIN Security Freeze on ${weak} BEFORE applying.\nSTEP 2: Route your $${limit.toLocaleString()} application to ${strong}-exclusive underwriters: ${map[strong]}.\nSTEP 3: Request stated-income threshold under $100,000 to bypass 4506-C tax transcript pulls.`
+        : `Freeze Bureau: ${weak} | Target Route: ${strong}-Primary Underwriters.\n[Unlock $19 Vault for exact 100+ Bank Bureau Pull & Stated-Income Cap List]`;
+
+      document.getElementById("out_c5").innerHTML = `
+        <strong style="color:var(--neon-orange)">Bureau Lock &amp; Route Blueprint:</strong>
+        <pre>${text}</pre>
+        <div class="aff-bar">
+          <a href="${LLP_CONFIG.amazonBooksUrl}" target="_blank" rel="noopener" class="aff-link">Corporate Credit Routing Books</a>
+          <a href="#pricing-plan" class="unlock-link">${unlocked ? "✓ Vault Unlocked" : "Unlock 100-Bank Matrix ($19)"}</a>
+        </div>`;
+    }
+
+    function runCard6() {
+      const score = parseInt(document.getElementById("c6_score").value) || 0;
+      const lines = parseInt(document.getElementById("c6_lines").value) || 0;
+      const days = parseInt(document.getElementById("c6_days").value) || 15;
+      const needed = Math.max(0, 4 - lines);
+      const projected = days >= 15 ? 88 : 80;
+
+      document.getElementById("out_c6").innerHTML = `
+        <strong style="color:var(--success)">Projected Paydex: ${projected} (Needs ${needed} more Net-30 trade lines)</strong>
+        <pre>D&B calculates Paydex by dollar-weighted days paid BEFORE due date. Paying ${days} days early across 4 reporting vendor accounts forces a ${projected} score in 30-45 days without paying D&B's $1,500 Concierge fee.</pre>
+        <div class="aff-bar">
+          <a href="${LLP_CONFIG.amazonBooksUrl}" target="_blank" rel="noopener" class="aff-link">Net-30 Vendor Directory Book</a>
+          <a href="#pricing-plan" class="unlock-link">Unlock D&amp;B Dispute Notice ($19)</a>
+        </div>`;
+    }
+
+    function runCard7() {
+      const cash = parseFloat(document.getElementById("c7_cash").value) || 0;
+      const loan = parseFloat(document.getElementById("c7_loan").value) || 0;
+      const capex = parseFloat(document.getElementById("c7_capex").value) || 0;
+      const unencumbered = Math.max(0, cash - capex);
+      const unlocked = isVaultUnlocked();
+
+      const memo = unlocked
+        ? `SBA SOP 50 10 WORKING CAPITAL ENCUMBRANCE SCHEDULE:\nOf the Company's $${cash.toLocaleString()} gross liquidity, $${capex.toLocaleString()} is contractually earmarked for Q1-Q4 equipment, inventory, and payroll expansion, leaving $${unencumbered.toLocaleString()} unencumbered operational buffer (<10% of requested $${loan.toLocaleString()} facility).`
+        : `Unencumbered Cash reduced from $${cash.toLocaleString()} to $${unencumbered.toLocaleString()} via CapEx Earmark.\n[Unlock $19 Vault for SBA SOP 50 10 Board Resolution Template]`;
+
+      document.getElementById("out_c7").innerHTML = `
+        <strong style="color:var(--accent-cyan)">SBA "Credit Elsewhere" Risk Neutralized</strong>
+        <pre>${memo}</pre>
+        <div class="aff-bar">
+          <a href="${LLP_CONFIG.amazonBooksUrl}" target="_blank" rel="noopener" class="aff-link">SBA 7(a) Underwriting Handbook</a>
+          <a href="#pricing-plan" class="unlock-link">${unlocked ? "✓ Vault Unlocked" : "Unlock SBA Resolution ($19)"}</a>
+        </div>`;
+    }
+
+    function runCard8() {
+      const ind = document.getElementById("c8_ind").value;
+      const rev = parseFloat(document.getElementById("c8_rev").value) || 0;
+      const unlocked = isVaultUnlocked();
+
+      const safeMap = {
+        "Crypto / Web3 / Digital Assets": "541511 (Custom Computer Programming & Data Processing Services)",
+        "Trucking / Freight / Logistics": "541614 (Process, Physical Distribution & Logistics Consulting)",
+        "Real Estate / Land Holding": "561110 (Office Administrative & Facility Management Services)",
+        "Agriculture / Livestock / Farm": "541690 (Other Scientific & Agricultural Technical Consulting)",
+        "Independent Consulting / Agency": "541512 (Computer Systems Design & Enterprise Integration)"
+      };
+
+      const targetNaics = safeMap[ind];
+      const text = unlocked
+        ? `RECOMMENDED SECONDARY NAICS: ${targetNaics}\nACTION: File a free Articles of Amendment / Business Activity update with your Secretary of State and D&B profile prior to submitting credit applications on $${rev.toLocaleString()} gross revenue.`
+        : `High-Risk Flag (${ind}) → Reclassify to Low-Risk Code ${targetNaics.split(" ")[0]}.\n[Unlock $19 Vault for exact Secretary of State & Bank Reclassification Wording]`;
+
+      document.getElementById("out_c8").innerHTML = `
+        <strong style="color:var(--neon-orange)">Approved Low-Risk Code: ${targetNaics}</strong>
+        <pre>${text}</pre>
+        <div class="aff-bar">
+          <a href="${LLP_CONFIG.amazonBooksUrl}" target="_blank" rel="noopener" class="aff-link">Corporate Structuring Playbook</a>
+          <a href="#pricing-plan" class="unlock-link">${unlocked ? "✓ Vault Unlocked" : "Unlock Filing Guide ($19)"}</a>
+        </div>`;
+    }
+
+    // 5. MAIN LOAN & DSCR CALCULATOR
+    function runMainCalculator() {
+      const P = parseFloat(document.getElementById("calc_principal").value) || 100000;
+      const years = parseFloat(document.getElementById("calc_years").value) || 5;
+      const badRate = parseFloat(document.getElementById("calc_bad_rate").value) || 14.5;
+      const goodRate = parseFloat(document.getElementById("calc_good_rate").value) || 7.8;
+      const noi = parseFloat(document.getElementById("calc_noi").value) || 4000;
+
+      const n = years * 12;
+      const rBad = (badRate / 100) / 12;
+      const rGood = (goodRate / 100) / 12;
+
+      const pmtBad = rBad > 0 ? (P * rBad * Math.pow(1 + rBad, n)) / (Math.pow(1 + rBad, n) - 1) : P / n;
+      const pmtGood = rGood > 0 ? (P * rGood * Math.pow(1 + rGood, n)) / (Math.pow(1 + rGood, n) - 1) : P / n;
+
+      const totalSavings = (pmtBad - pmtGood) * n;
+      const dscr = pmtGood > 0 ? (noi / pmtGood) : 0;
+
+      document.getElementById("res_bad_pmt").textContent = "$" + pmtBad.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+      document.getElementById("res_good_pmt").textContent = "$" + pmtGood.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+      document.getElementById("res_savings").textContent = "$" + Math.max(0, totalSavings).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+
+      const dscrEl = document.getElementById("res_dscr");
+      dscrEl.textContent = dscr.toFixed(2) + "x " + (dscr >= 1.25 ? "(PASS)" : "(BELOW 1.25x)");
+      dscrEl.style.color = dscr >= 1.25 ? "var(--success)" : "var(--danger)";
+
+      localStorage.setItem("llp_calc_state", JSON.stringify({P, years, badRate, goodRate, noi}));
+    }
+
+    function loadSavedCalculator() {
+      try {
+        const saved = JSON.parse(localStorage.getItem("llp_calc_state"));
+        if (saved) {
+          document.getElementById("calc_principal").value = saved.P;
+          document.getElementById("calc_years").value = saved.years;
+          document.getElementById("calc_bad_rate").value = saved.badRate;
+          document.getElementById("calc_good_rate").value = saved.goodRate;
+          document.getElementById("calc_noi").value = saved.noi;
+        }
+      } catch (e) {}
+      runMainCalculator();
+    }
+
+    function runAllCards() {
+      runCard1(); runCard2(); runCard3(); runCard4();
+      runCard5(); runCard6(); runCard7(); runCard8();
+    }
+
+    // INITIALIZE & SYNC BUTTONS
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("tier2_checkout").href = LLP_CONFIG.vaultCheckoutUrl;
+      document.getElementById("tier3_koinly").href = LLP_CONFIG.koinlyUrl;
+      document.getElementById("tier3_ledger").href = LLP_CONFIG.ledgerUrl;
+      document.getElementById("tier3_books").href = LLP_CONFIG.amazonBooksUrl;
+      document.getElementById("calc_crypto_cta").href = LLP_CONFIG.changenowUrl;
+      render3DBackground();
+      loadSavedCalculator();
+      runAllCards();
+    });
+  </script>
+</body>
+</html>
